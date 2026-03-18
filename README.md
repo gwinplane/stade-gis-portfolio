@@ -10,6 +10,14 @@ GIS-Projekt mit PostGIS und QGIS für den Landkreis Stade, Niedersachsen.
 - OpenStreetMap Daten (Geofabrik)
 - osm2pgsql
 
+[Straßenkarte Landkreis Stade](stade_karte.png)
+```
+
+→ **Commit changes**
+
+Dann sieht jeder Arbeitgeber sofort die Karte!
+Тогда каждый работодатель сразу увидит карту!
+
 ## Projekte
 
 ### Projekt 1 — Straßenkarte Landkreis Stade
