@@ -16,7 +16,6 @@ GIS-Projekt mit PostGIS und QGIS für den Landkreis Stade, Niedersachsen.
 → **Commit changes**
 
 Dann sieht jeder Arbeitgeber sofort die Karte!
-Тогда каждый работодатель сразу увидит карту!
 
 ## Projekte
 
