@@ -89,3 +89,74 @@ WHERE building IS NOT NULL
 AND name IS NOT NULL
 ORDER BY flaeche_m2 DESC
 LIMIT 20;
+
+-- =============================================
+-- Neue SQL-Abfragen: Datenanalyse Stade
+-- Datum: März 2026
+-- =============================================
+
+
+-- ---------------------------------------------
+-- Abfrage 7: Alle Bäckereien mit Namen
+-- AND = zwei Bedingungen gleichzeitig
+-- IS NOT NULL = nur Objekte mit Namen
+-- ---------------------------------------------
+SELECT name, shop
+FROM planet_osm_point
+WHERE shop = 'bakery'
+AND name IS NOT NULL
+ORDER BY name;
+
+
+-- ---------------------------------------------
+-- Abfrage 8: Bäckerei-Ketten nach Filialanzahl
+-- GROUP BY name, shop = gruppiere nach Name
+-- COUNT(*) = zähle Filialen pro Gruppe
+-- ---------------------------------------------
+SELECT name, shop, COUNT(*) AS anzahl
+FROM planet_osm_point
+WHERE shop = 'bakery'
+AND name IS NOT NULL
+GROUP BY name, shop
+ORDER BY anzahl DESC;
+
+
+-- ---------------------------------------------
+-- Abfrage 9: Datenbereinigung mit LOWER()
+-- LOWER() = macht Text kleingeschrieben
+-- Löst Problem: "von Allwörden" vs "Von Allwörden"
+-- Ergebnis: von allwörden = 8 Filialen
+-- ---------------------------------------------
+SELECT LOWER(name), shop, COUNT(*) AS anzahl
+FROM planet_osm_point
+WHERE shop = 'bakery'
+GROUP BY LOWER(name), shop
+ORDER BY anzahl DESC;
+
+
+-- ---------------------------------------------
+-- Abfrage 10: Top 5 Städte nach Einwohnerzahl
+-- ::integer = Text in Zahl umwandeln
+-- Wichtig! Ohne ::integer sortiert PostgreSQL
+-- alphabetisch statt numerisch!
+-- LIMIT 5 = nur 5 Ergebnisse zeigen
+-- ---------------------------------------------
+SELECT name, place, population
+FROM planet_osm_point
+WHERE place IS NOT NULL
+AND population IS NOT NULL
+ORDER BY population::integer DESC
+LIMIT 5;
+
+
+-- ---------------------------------------------
+-- Abfrage 11: Supermarkt-Ketten nach Filialanzahl
+-- Kombination von LOWER(), COUNT(), GROUP BY
+-- Ergebnis: REWE = 6 Filialen (Marktführer!)
+-- ---------------------------------------------
+SELECT LOWER(name), COUNT(*) AS anzahl
+FROM planet_osm_point
+WHERE shop = 'supermarket'
+AND name IS NOT NULL
+GROUP BY LOWER(name)
+ORDER BY anzahl DESC;
